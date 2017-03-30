@@ -8,7 +8,7 @@
 
 算法使用老师提供的MINIMAX算法，eval()函数不期将改进（如果我能想出来的话
 
->```
+```
 function ALPHA-BETA-SEARCH(state) returns an action
 v ← MAX-VALUE(state, min_utility, max_utility)
 return the action in ACTIONS(state) with value v
