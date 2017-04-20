@@ -4,19 +4,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-
+/*
+ * GUI file for game. Contains 2 GUI page: GUI1 and GUI2
+ */
 public class GameGui{
-		private JFrame frame;
-		private JPanel startButtonPanel;
-		private JButton startButton;
-		private JPanel buttongroupPanel;
-		private JLabel diffLabel;
-		private ButtonGroup group;
+	
 		int gameDifficulty;
 		
+		private JFrame frame;
+		//GUI1
+		private JPanel startButtonPanel;
+		private JPanel buttongroupPanel;
+		private JButton startButton;
+		private JLabel diffLabel;
+		private ButtonGroup group;
+	
 	
 	/*
-	 * First UI class: choose game difficulty and start button
+	 * First GUI page method: choose game difficulty and start button
 	 */
 	public void initGUI1(){
 		//better look for frame
@@ -84,6 +89,7 @@ public class GameGui{
 	class StartButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent event){
 			//frame.repaint();//can call new GUI?
+			new GameView();
 		}
 	}
 	
