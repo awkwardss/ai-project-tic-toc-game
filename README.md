@@ -1,5 +1,7 @@
 # ai-project tic-toc-game
 
+17.04.19 change to Java. Finished difficulty choosing UI.
+
 ##
 
 这是一个神秘的game
