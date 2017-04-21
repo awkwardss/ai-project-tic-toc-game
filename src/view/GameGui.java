@@ -14,7 +14,7 @@ public class GameGui{
 		private JFrame frame;
 		//GUI1
 		private JPanel startButtonPanel;
-		private JPanel buttongroupPanel;
+		private JPanel buttonGroupPanel;
 		private JButton startButton;
 		private JLabel diffLabel;
 		private ButtonGroup group;
@@ -34,12 +34,12 @@ public class GameGui{
 		frame.setSize(500,500);
 			
 		//difficulty choose box AND start button: 2 panels
-		//use JPannel to store buttons
-		buttongroupPanel = new JPanel();
-		buttongroupPanel.setLayout(new GridLayout(4, 1));//use grid layout for button list
-		//buttongroupPanel.setLayout(new BoxLayout(buttongroupPanel, BoxLayout.Y_AXIS));
+		//use JPanel to store buttons
+		buttonGroupPanel = new JPanel();
+		buttonGroupPanel.setLayout(new GridLayout(4, 1));//use grid layout for button list
+		//buttonGroupPanel.setLayout(new BoxLayout(buttongroupPanel, BoxLayout.Y_AXIS));
 		diffLabel = new JLabel("Please choose difficult level:");
-		buttongroupPanel.add(diffLabel);
+		buttonGroupPanel.add(diffLabel);
 		//radio button for difficulty
 		group = new ButtonGroup();
 		addRadioButton("Easy", 1);
@@ -54,7 +54,7 @@ public class GameGui{
 		startButton.addActionListener(new StartButtonListener());
 				
 		frame.getContentPane().add(BorderLayout.SOUTH, startButtonPanel);
-		frame.getContentPane().add(BorderLayout.CENTER, buttongroupPanel);
+		frame.getContentPane().add(BorderLayout.CENTER, buttonGroupPanel);
 				
 					
 		frame.setVisible(true); 
@@ -68,7 +68,7 @@ public class GameGui{
 	public void addRadioButton(String name, int difficulty){
 		JRadioButton button = new JRadioButton(name, true);
 		group.add(button);
-		buttongroupPanel.add(button);
+		buttonGroupPanel.add(button);
 		
 		ActionListener listener = new ActionListener() {
 			@Override
