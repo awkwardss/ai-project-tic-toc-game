@@ -41,7 +41,7 @@ public class GameView {
 		gamePanel = new JPanel();
 		//gamePanel.add(new boardComponent());
 		addBoard();
-		gamePanel.setBackground(Color.pink);
+		//gamePanel.setBackground(Color.pink);
 
 
 		// game info panel
@@ -71,38 +71,22 @@ public class GameView {
 		frame.setVisible(true);
 	}
 
-	/*
-	class BoardPanel extends JPanel{
-		private Image board;
 
-		public boardComponent(){
-			board = new ImageIcon("img/board.png").getImage();
-		}
-
-		public void paintComponent(Graphics g){
-			if (board != null){
-				int imageHeight = board.getHeight(this);
-				int imageWidth = board.getWidth(this);
-
-				g.drawImage(board, 250, 50, null); //draw board in (200, 50)
-			} else {
-				System.out.print("Fail to read board image!");
-			}
-		}
-	}
-	*/
 	public void addBoard(){
 		//JLabel way: not used
 		//JLabel boardLabel = new JLabel(new ImageIcon("img/board.png"));
 		//gamePanel.add(BorderLayout.CENTER, boardLabel);
 
 		//JPanel way:
+		JPanel boardPanel = new BoardPanel();
+		boardPanel.setPreferredSize(new Dimension(405, 405)); //board pic size 405*405
+		gamePanel.add(boardPanel);
 
 	}
 
 	public class BoardPanel extends JPanel {
-		private BufferedImage board;
-
+		/*
+		private Image board;
 		public BoardPanel(){
 			try {
 				board = ImageIO.read(new File("img/board.png"));
@@ -110,9 +94,20 @@ public class GameView {
 				System.out.print("Fail to read board image!");
 			}
 		}
+		*/
+
+		private  ImageIcon icon;
+		private Image board;
+		public BoardPanel() {
+			icon =  new ImageIcon("img/board.png");
+			board = icon.getImage();
+		}
+
 
 		@Override
 		public void paintComponent (Graphics g) {
+			//super.paintComponent(g);
+			g.drawImage(board, 0, 0, icon.getIconWidth(),icon.getIconHeight(), null);
 
 		}
 	}
