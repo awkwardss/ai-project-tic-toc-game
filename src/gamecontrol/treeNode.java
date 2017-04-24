@@ -38,4 +38,9 @@ public class treeNode {
     public void setBoard(BoardStatus b) {this.board = b;}
     public void setStepX(int i) {this.stepX = i;}
     public void setStepY(int i) {this.stepY = i;}
+
+    public int getValue() {return this.value;}
+    public int getDepth() {return this.depth;}
+    public int getStepX() {return this.stepX;}
+    public int getStepY() {return this.stepY;}
 }
