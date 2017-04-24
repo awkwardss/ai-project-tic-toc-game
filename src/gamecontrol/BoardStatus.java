@@ -221,5 +221,5 @@ public class BoardStatus {
         evaluate = 6*x3+3*x2+1*x1-(6*o3+3*o2+1*o1);
         this.setEval(evaluate);
     }
-    
+
 }
