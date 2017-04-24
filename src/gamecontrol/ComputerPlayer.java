@@ -6,7 +6,7 @@ import java.lang.*;
 
 public class ComputerPlayer {
 
-    private boolean cutOffOccured;
+    private boolean cutOffOccurred;
     private boolean maxDepthReached;
     private int totalGenerateNodes;
     private int pruneMax;
@@ -90,8 +90,8 @@ public class ComputerPlayer {
 
     //public int max (int i, int j) { if (i >= j) return i; else return j;}
 
-    public void setCutOffOccured(boolean cutOffOccured1) {this.cutOffOccured = cutOffOccured1;}
-    public boolean getCutOffOccured() {return this.cutOffOccured;}
+    public void setCutOffOccurred(boolean cutOffOccurred1) {this.cutOffOccurred = cutOffOccurred1;}
+    public boolean getCutOffOccurred() {return this.cutOffOccurred;}
 
     public void setMaxDepthReached(boolean maxDepthReached1) {this.maxDepthReached = maxDepthReached1;}
     public boolean getMaxDepthReached() {return this.maxDepthReached;}
