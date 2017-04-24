@@ -26,42 +26,18 @@ public class ComputerPlayer {
    // public int ABMaxValue(node)
 
 
-    public void setCutOffOccured(boolean cutOffOccured1){
-        this.cutOffOccured = cutOffOccured1;
-    }
+    public void setCutOffOccured(boolean cutOffOccured1) {this.cutOffOccured = cutOffOccured1;}
+    public boolean getCutOffOccured() {return this.cutOffOccured;}
 
-    public boolean getCutOffOccured(){
-        return this.cutOffOccured;
-    }
+    public void setMaxDepthReached(boolean maxDepthReached1) {this.maxDepthReached = maxDepthReached1;}
+    public boolean getMaxDepthReached() {return this.maxDepthReached;}
 
-    public void setMaxDepthReached(boolean maxDepthReached1){
-        this.maxDepthReached = maxDepthReached1;
-    }
-    public boolean getMaxDepthReached(){
-        return this.maxDepthReached;
-    }
+    public void setTotalGenerateNodes(int i) {this.totalGenerateNodes = i;}
+    public int getTotalGenerateNodes() {return this.totalGenerateNodes;}
 
-    public void setTotalGenerateNodes(int i){
-        this.totalGenerateNodes = i;
-    }
+    public void setPruneMax(int p) {this.pruneMax = p;}
+    public int getPruneMax() {return pruneMax;}
 
-    public int getTotalGenerateNodes(){
-        return this.totalGenerateNodes;
-    }
-
-    public void setPruneMax(int p){
-        this.pruneMax = p;
-    }
-
-    public int getPruneMax(){
-        return pruneMax;
-    }
-
-    public void setPruneMin(int p){
-        this.pruneMin = p;
-    }
-
-    public int getPruneMin(){
-        return pruneMin;
-    }
+    public void setPruneMin(int p) {this.pruneMin = p;}
+    public int getPruneMin() {return pruneMin;}
 }
