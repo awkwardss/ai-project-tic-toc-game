@@ -9,6 +9,8 @@ import java.io.IOException;
 
 public class GameView {
 
+
+
 	private JFrame frame;
 	//GUI2
 	private JPanel gamePanel;
@@ -24,7 +26,7 @@ public class GameView {
 	/*
 	 * Main playing GUI (GUI2).
 	 */
-	public void GameView(){
+	public void GameView(int gameDifficulty, boolean compPlayFirst){
 		//better look for frame
 		JFrame.setDefaultLookAndFeelDecorated(true);
 

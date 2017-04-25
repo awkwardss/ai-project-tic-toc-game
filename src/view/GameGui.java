@@ -1,7 +1,5 @@
 package view;
 
-import com.sun.deploy.panel.JavaPanel;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -12,7 +10,7 @@ import java.awt.event.*;
 public class GameGui{
 	
 	int gameDifficulty;
-	boolean playFirst;
+	boolean computerPlayFirst;
 		
 	private JFrame frame;
 	//GUI1
@@ -59,8 +57,8 @@ public class GameGui{
 		orderLabel = new JLabel("Please choose playing first or second:");
 		orderGroupPanel.add(orderLabel);
 		group2 = new ButtonGroup();
-		addOrderRadioButton("Play first", true);
-		addOrderRadioButton("Play second", false);
+		addOrderRadioButton("Play first", false);
+		addOrderRadioButton("Play second", true);
 
 
 		//start button panel
@@ -87,17 +85,15 @@ public class GameGui{
 		JRadioButton button = new JRadioButton(name, true);
 		group.add(button);
 		buttonGroupPanel.add(button);
-		
-		ActionListener listener = new ActionListener() {
+
+		//use anonymous class as listener
+		button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				gameDifficulty = difficulty;
-				
 			}
-		};
-		
-		button.addActionListener(listener);
+		});
+
 	}
 	
 	/*
@@ -110,14 +106,16 @@ public class GameGui{
 		group2.add(button);
 		orderGroupPanel.add(button);
 
-		ActionListener listener = new ActionListener() {
+
+		//use anonymous class as listener
+		button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				playFirst = order;
+				computerPlayFirst = order;
 			}
-		};
+		});
 
-		button.addActionListener(listener);
+
 	}
 
 	/*
@@ -128,7 +126,7 @@ public class GameGui{
 			//frame.repaint();//can call new GUI?
 			frame.setVisible(false);
 			GameView g2 = new GameView();
-			g2.GameView();
+			g2.GameView(gameDifficulty, computerPlayFirst);
 		}
 	}
 	
