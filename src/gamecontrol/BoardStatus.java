@@ -28,6 +28,8 @@ public class BoardStatus {
     public void setBoardOne(int j,int k, int value) {this.board[j][k] = value;}
     public int getBoardOne(int j, int k) {return this.board[j][k];}
 
+    public void unSetBoardOne(int j, int k) {this.board[j][k] = 0;}
+
     public boolean ifBoardOneX(int j, int k){
         if (this.getBoardOne(j,k)== 1)
             return true;
