@@ -43,4 +43,9 @@ public class treeNode {
     public BoardStatus getBoard() {return this.board;}
     public int getStepX() {return this.stepX;}
     public int getStepY() {return this.stepY;}
+
+    public treeNode gettChildInIndex (int i) {return this.tChild.get(i);}
+    public int getChildSize () {return  this.tChild.size();}
+
+    public void addChild(treeNode n) {this.tChild.add(n);}
 }
