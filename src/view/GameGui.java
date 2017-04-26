@@ -9,8 +9,8 @@ import java.awt.event.*;
  */
 public class GameGui{
 	
-	int gameDifficulty;
-	boolean computerPlayFirst;
+	int gameDifficulty = 1;
+	boolean userPlayFirst = true;
 		
 	private JFrame frame;
 	//GUI1
@@ -57,8 +57,8 @@ public class GameGui{
 		orderLabel = new JLabel("Please choose playing first or second:");
 		orderGroupPanel.add(orderLabel);
 		group2 = new ButtonGroup();
-		addOrderRadioButton("Play first", false);
-		addOrderRadioButton("Play second", true);
+		addOrderRadioButton("Play first", true);
+		addOrderRadioButton("Play second", false);
 
 
 		//start button panel
@@ -111,7 +111,7 @@ public class GameGui{
 		button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				computerPlayFirst = order;
+				userPlayFirst = order;
 			}
 		});
 
@@ -126,7 +126,7 @@ public class GameGui{
 			//frame.repaint();//can call new GUI?
 			frame.setVisible(false);
 			GameView g2 = new GameView();
-			g2.GameView(gameDifficulty, computerPlayFirst);
+			g2.GameView(gameDifficulty, userPlayFirst);
 		}
 	}
 	

@@ -22,11 +22,17 @@ public class GameView {
 	private JLabel maxPruneLabel;
 	private JLabel minPruneLabel;
 
+	int gameDiff;
+	boolean userPlayFirst;
+
 
 	/*
 	 * Main playing GUI (GUI2).
 	 */
-	public void GameView(int gameDifficulty, boolean compPlayFirst){
+	public void GameView(int gameDifficulty, boolean uPlayFirst){
+		gameDiff = gameDifficulty;
+		userPlayFirst = uPlayFirst;
+
 		//better look for frame
 		JFrame.setDefaultLookAndFeelDecorated(true);
 
@@ -34,7 +40,7 @@ public class GameView {
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //exit
 		frame.setTitle("Tic-toc-game");
-		frame.setSize(800,500);
+		frame.setSize(800,440);
 		frame.setResizable(false);
 
 
@@ -54,7 +60,8 @@ public class GameView {
 		/////////////not right//////need modify//////////
 		/////////////////////////////////////////
 		////////////////////////
-		gameStatus = new JLabel("Game Status:");
+		gameStatus = new JLabel("<html><body>Game Status:<br>&nbsp;&nbsp;Game Difficulty:&nbsp;"+gameDiff
+				+"<br>&nbsp;&nbsp;User Play first?&nbsp;"+userPlayFirst+"</body></html>");
 		cutoffLabel = new JLabel("If Cutoff Occurred?");
 		maxDepthLabel = new JLabel("If Max Depth Reached?");
 		totalNodeLabel = new JLabel("Total Number of Nodes Generated:");
@@ -72,6 +79,8 @@ public class GameView {
 
 		frame.setVisible(true);
 	}
+
+
 
 
 	public void addBoard(){

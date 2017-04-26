@@ -19,12 +19,12 @@ public class ComputerPlayer {
     private int xNext;
     private int yNext;
 
-    private BoardStatus boardNow;
+    //private BoardStatus boardNow;
     private treeNode rootNode = new treeNode();
 
     ArrayList<treeNode> searchTree = new ArrayList<>();
 
-    public void ComputerPlayer(){
+    public void ComputerPlayer(BoardStatus boardNow){
         //code for get the current board
         //
         //
