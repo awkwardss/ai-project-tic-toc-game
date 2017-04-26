@@ -3,12 +3,14 @@
 ### History
 
 170424 Finished αβ pruning with cutoff algorithm
+       <!--看了网上的例子才想到用button做棋盘 觉得自己很笨 之前自己做的棋盘图片都白做了 不开心T.T-->
 
 17.04.19 change to Java. Finished difficulty choosing UI.
 
-### java复健向编程(bu
+### .
+<del>java复健向编程</del>
 
-这是一个神秘的game (井字棋x4/3
+这是一个神秘的game (井字棋x16/9
 
 输入一个O 你将得到一个计算机绞尽脑汁找到的一个X （10min内）
 
