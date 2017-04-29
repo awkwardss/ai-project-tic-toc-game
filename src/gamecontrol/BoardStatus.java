@@ -128,16 +128,7 @@ public class BoardStatus {
         return sum;
     }
 
-    /*
-     * putOne: put one dot with value xo in place [x, y]
-     * @param int x: x value of the position
-     * @param int y: y value of the position
-     * @param int xo: value of the position 0-not set 1-X 10-O
-     */
-    //
-    public void putOne (int x, int y, int xo){
-        this.setBoardOne(x, y, xo);
-    }
+
 
     /*
      * isTerminal: find if the game is end

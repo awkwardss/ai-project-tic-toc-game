@@ -38,6 +38,7 @@ public class GameView {
 	boolean userPlayFirst;
 
 	BoardStatus boardNow;
+	ComputerPlayer cp;
 
 
 	/*
@@ -46,6 +47,7 @@ public class GameView {
 	public void GameView(int gameDifficulty, boolean uPlayFirst){
 		this.gameDiff = gameDifficulty;
 		this.userPlayFirst = uPlayFirst;
+		boardNow = new BoardStatus();
 
 		//better look for frame
 		JFrame.setDefaultLookAndFeelDecorated(true);
@@ -112,12 +114,13 @@ public class GameView {
 
 		frame.setVisible(true);
 
-		/*
+
 		if (!uPlayFirst){
-			ComputerPlayer cp = new ComputerPlayer();
+			cp = new ComputerPlayer();
 			cp.firstStep(boardNow);
+			boardBtnArray[5].doClick(); //position (1, 1)
 		}
-		*/
+
 	}
 
 
@@ -141,14 +144,16 @@ public class GameView {
 	 * @param y: y value of button position
 	 */
 	public void addBoardButton(int x, int y){
+
 		int buttonIndex = 4*x+y;
 		this.boardBtnArray[buttonIndex] = new JButton();
+		this.boardBtnArray[buttonIndex].setFont(new Font("Arial", Font.PLAIN, 60));
 		this.boardBtnArray[buttonIndex].setPreferredSize(new Dimension(80, 80));
-		this.gamePanel.add(boardBtnArray[buttonIndex]);
 
-
-		//use anonymous class as listener
+		//use inner class as listener
 		boardBtnArray[buttonIndex].addActionListener(new boardButtonListener(x, y));
+
+		this.gamePanel.add(boardBtnArray[buttonIndex]);
 	}
 
 
@@ -194,12 +199,60 @@ public class GameView {
 	class boardButtonListener implements ActionListener {
 		private int x;
 		private int y;
+		private BoardStatus board;
+		private int position;
 
-		public void boardButtonListener(int x, int y){
+		public boardButtonListener(int x, int y){
 			this.x = x;
 			this.y = y;
+			this.position = 4*this.x + this.y;
+			//System.out.println(this.x + "   " + this.y + "   " + this.position);
+
 		}
+
 		public void actionPerformed(ActionEvent event){
+			//redraw full board?
+			/*
+			for (int i=0; i<4; i++){
+				for (int j=0; j<4; j++){
+					if
+				}
+			}
+			*/
+
+			//set game info value
+
+			System.out.println("woshilistener");
+
+			//set button value: X or O? and according to this to
+			if (boardNow.getBoardOne(x, y) == 1) { //this is X
+				boardBtnArray[position].setText("X");
+				//then need user click
+				System.out.println("dianwo");
+
+
+
+			}
+			else if (boardNow.getBoardOne(x, y) == 10) { //this is O
+				boardBtnArray[position].setText("O");
+
+				//then need computer click
+				int next = cp.getNextStep(boardNow);
+				boardBtnArray[next].doClick();
+			}
+			else {
+				System.out.println("!!!!!!!!!!");
+				for (int i=0; i<4; i++){
+					for (int j=0; j<4; j++){
+						System.out.println(i + ", "+ j + "= " + boardNow.getBoardOne(i,j));
+					}
+				}
+			}
+
+
+
+
+
 
 		}
 	}

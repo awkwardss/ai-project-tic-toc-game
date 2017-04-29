@@ -24,7 +24,7 @@ public class ComputerPlayer {
 
     ArrayList<treeNode> searchTree = new ArrayList<>();
 
-    public void ComputerPlayer(BoardStatus boardNow){
+    public int getNextStep(BoardStatus boardNow){
         //code for get the current board
         //
         //
@@ -59,7 +59,7 @@ public class ComputerPlayer {
 
 
 
-
+        return (4*this.getxNext() + this.getyNext()); //return the positon in one value
 
     }
 
@@ -189,11 +189,11 @@ public class ComputerPlayer {
 
 
     /*
-     * Method for computer play first: first step. It will set X in (2, 2)
+     * Method for computer play first: first step. It will set X in (1, 1)
      * @param: BoardStatus board: boardNow in Class GameView
      */
     public void firstStep(BoardStatus board) {
-        board.setBoardOne(2, 2, 1);
+        board.setBoardOne(1, 1, 1);
 
     }
 
