@@ -1,5 +1,8 @@
 package view;
 
+import gamecontrol.BoardStatus;
+import gamecontrol.ComputerPlayer;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -28,17 +31,21 @@ public class GameView {
 
 	private JButton restartButton;
 
+	private JButton[] boardBtnArray = new JButton[16];
+
 
 	int gameDiff;
 	boolean userPlayFirst;
+
+	BoardStatus boardNow;
 
 
 	/*
 	 * Main playing GUI (GUI2).
 	 */
 	public void GameView(int gameDifficulty, boolean uPlayFirst){
-		gameDiff = gameDifficulty;
-		userPlayFirst = uPlayFirst;
+		this.gameDiff = gameDifficulty;
+		this.userPlayFirst = uPlayFirst;
 
 		//better look for frame
 		JFrame.setDefaultLookAndFeelDecorated(true);
@@ -55,7 +62,8 @@ public class GameView {
 		//main game panel AND game info panel
 		//game board panel
 		gamePanel = new JPanel();
-		//gamePanel.add(new boardComponent());
+		gamePanel.setLayout(new GridLayout(4, 4));
+		gamePanel.setPreferredSize(new Dimension(400,400));
 		addBoard();
 		//gamePanel.setBackground(Color.pink);
 
@@ -64,8 +72,6 @@ public class GameView {
 		gameInfoTopPanel = new JPanel();
 		gameInfoTopPanel.setLayout(new GridLayout(1, 4));
 
-		//gameStatus = new JLabel("<html><body>Game Status:<br>&nbsp;&nbsp;Game Difficulty:&nbsp;"+gameDiff
-				//+"<br>&nbsp;&nbsp;User Play first?&nbsp;"+userPlayFirst+"</body></html>");
 		gameStatus = new JLabel("Game Status");
 		gameInfoTopPanel.add(gameStatus);
 		addGameInfo2(gameDiff);
@@ -105,101 +111,69 @@ public class GameView {
 		frame.getContentPane().add(BorderLayout.WEST, gameInfoLeftPanel);
 
 		frame.setVisible(true);
-	}
 
-
-
-	/*
-	public void addBoard(){
-		//JLabel way: not used
-		//JLabel boardLabel = new JLabel(new ImageIcon("img/board.png"));
-		//gamePanel.add(BorderLayout.CENTER, boardLabel);
-
-		//JPanel way:
-		JPanel boardPanel = new BoardPanel();
-		boardPanel.setPreferredSize(new Dimension(405, 405)); //board pic size 405*405
-		gamePanel.add(boardPanel);
-
-	}
-
-	public class BoardPanel extends JPanel {
-
-		private  ImageIcon icon;
-		private Image board;
-		public BoardPanel() {
-			icon =  new ImageIcon("img/board.png");
-			board = icon.getImage();
+		/*
+		if (!uPlayFirst){
+			ComputerPlayer cp = new ComputerPlayer();
+			cp.firstStep(boardNow);
 		}
-
-
-		@Override
-		public void paintComponent (Graphics g) {
-			//super.paintComponent(g);
-			g.drawImage(board, 0, 0, icon.getIconWidth(),icon.getIconHeight(), null);
-
-		}
+		*/
 	}
-	*/
+
 
 	/*
 	 * Method for GUI2. Automatically add game board buttons method
 	 */
 	public void addBoard(){
-		gamePanel.setLayout(new GridLayout(4, 4));
-		gamePanel.setPreferredSize(new Dimension(400,400));
-
 
 		for (int i=0; i<4; i++){
 			for (int j=0; j<4; j++){
-				addBoardButton(i, j);
+				this.addBoardButton(i, j);
 			}
 		}
 
 	}
 
-
+/*
 	/*
 	 * Method for GUI2. Add game board buttons
 	 * @param x: x value of button position
 	 * @param y: y value of button position
 	 */
 	public void addBoardButton(int x, int y){
-		JButton button = new JButton();
-		button.setPreferredSize(new Dimension(80, 80));
-		gamePanel.add(button);
+		int buttonIndex = 4*x+y;
+		this.boardBtnArray[buttonIndex] = new JButton();
+		this.boardBtnArray[buttonIndex].setPreferredSize(new Dimension(80, 80));
+		this.gamePanel.add(boardBtnArray[buttonIndex]);
 
 
 		//use anonymous class as listener
-		button.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-			//////////////////
-				///////////////
-				/////////////////
-			}
-		});
+		boardBtnArray[buttonIndex].addActionListener(new boardButtonListener(x, y));
 	}
+
+
+
+
 
 
 	public void addGameInfo2 (int gameDiff) {
 		if (gameDiff == 1) {
-			gameStatus2 = new JLabel("Difficulty: Easy");
+			this.gameStatus2 = new JLabel("Difficulty: Easy");
 		} else if (gameDiff == 2){
-			gameStatus2 = new JLabel("Difficulty: Intermediate");
+			this.gameStatus2 = new JLabel("Difficulty: Intermediate");
 		} else if (gameDiff == 3) {
-			gameStatus2 = new JLabel("Difficulty: Difficult");
+			this.gameStatus2 = new JLabel("Difficulty: Difficult");
 		}
-		gameInfoTopPanel.add(gameStatus2);
+		this.gameInfoTopPanel.add(gameStatus2);
 	}
 
 	public void addGameInfo3 (boolean userPlayFirst) {
 		if (userPlayFirst) {
-			gameStatus3 = new JLabel("USER plays first");
+			this.gameStatus3 = new JLabel("USER plays first");
 		} else if (!userPlayFirst){
-			gameStatus3 = new JLabel("COMPUTER plays first");
+			this.gameStatus3 = new JLabel("COMPUTER plays first");
 		}
-		gameInfoTopPanel.add(gameStatus3);
+		this.gameInfoTopPanel.add(gameStatus3);
 	}
 
 	/*
@@ -211,6 +185,22 @@ public class GameView {
 			frame.setVisible(false);
 			GameGui g1 = new GameGui();
 			g1.initGUI1();
+		}
+	}
+
+	/*
+	 * inner class for board button listener
+	 */
+	class boardButtonListener implements ActionListener {
+		private int x;
+		private int y;
+
+		public void boardButtonListener(int x, int y){
+			this.x = x;
+			this.y = y;
+		}
+		public void actionPerformed(ActionEvent event){
+
 		}
 	}
 }

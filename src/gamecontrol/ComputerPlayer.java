@@ -188,6 +188,17 @@ public class ComputerPlayer {
 
 
 
+    /*
+     * Method for computer play first: first step. It will set X in (2, 2)
+     * @param: BoardStatus board: boardNow in Class GameView
+     */
+    public void firstStep(BoardStatus board) {
+        board.setBoardOne(2, 2, 1);
+
+    }
+
+
+
 
     //public int max (int i, int j) { if (i >= j) return i; else return j;}
 

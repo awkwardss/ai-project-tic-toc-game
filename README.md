@@ -2,6 +2,8 @@
 
 ### History
 
+170428 摸鱼了好几天……咕唔……总之在写button的listener,写完这个就差不多完工了
+
 170424 Finished αβ pruning with cutoff algorithm
        <!--看了网上的例子才想到用button做棋盘 觉得自己很笨 之前自己做的棋盘图片都白做了 不开心T.T-->
 
