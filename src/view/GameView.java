@@ -17,20 +17,11 @@ public class GameView {
 
 	private JFrame frame;
 	//GUI2
-	private JPanel gamePanel;
-	private JPanel gameInfoTopPanel;
-	private JPanel gameInfoLeftPanel;
-	private JLabel gameStatus;
-	private JLabel gameStatus2;
-	private JLabel gameStatus3;
-	private JLabel cutoffLabel;
-	private JLabel maxDepthLabel;
-	private JLabel totalNodeLabel;
-	private JLabel maxPruneLabel;
-	private JLabel minPruneLabel;
+	private JPanel gamePanel, gameInfoTopPanel, gameInfoLeftPanel;
+	private JLabel gameStatus,gameStatus2,gameStatus3;
+	private JLabel cutoffLabel, maxDepthLabel, totalNodeLabel, maxPruneLabel, minPruneLabel;
 
 	private JButton restartButton;
-
 	private JButton[] boardBtnArray = new JButton[16];
 
 
@@ -38,7 +29,7 @@ public class GameView {
 	boolean userPlayFirst;
 
 	BoardStatus boardNow;
-	ComputerPlayer cp;
+	ComputerPlayer computerPlayerInst;
 
 
 	/*
@@ -93,13 +84,15 @@ public class GameView {
 		////////////////////////
 		// game info panel -- LEFT part
 		gameInfoLeftPanel = new JPanel();
-		gameInfoLeftPanel.setLayout(new GridLayout(5, 1));
+		gameInfoLeftPanel.setLayout(new GridLayout(10, 1));
 
 		cutoffLabel = new JLabel("If Cutoff Occurred?");
 		maxDepthLabel = new JLabel("If Max Depth Reached?");
 		totalNodeLabel = new JLabel("Total Number of Nodes Generated:");
 		maxPruneLabel = new JLabel("Numbers of Pruning Occurred within MAX:");
 		minPruneLabel = new JLabel("Numbers of Pruning Occurred within MIN:");
+
+
 
 		gameInfoLeftPanel.add(cutoffLabel);
 		gameInfoLeftPanel.add(maxDepthLabel);
@@ -116,8 +109,8 @@ public class GameView {
 
 
 		if (!uPlayFirst){
-			cp = new ComputerPlayer();
-			cp.firstStep(boardNow);
+			computerPlayerInst = new ComputerPlayer();
+			computerPlayerInst.firstStep(boardNow);
 			boardBtnArray[5].doClick(); //position (1, 1)
 		}
 
@@ -199,8 +192,8 @@ public class GameView {
 	class boardButtonListener implements ActionListener {
 		private int x;
 		private int y;
-		private BoardStatus board;
 		private int position;
+		private int endValue;
 
 		public boardButtonListener(int x, int y){
 			this.x = x;
@@ -220,33 +213,62 @@ public class GameView {
 			}
 			*/
 
-			//set game info value
+			//disable this button
+			boardBtnArray[position].setEnabled(false);
 
-			System.out.println("woshilistener");
+			endValue = boardNow.isTerminal();
+
 
 			//set button value: X or O? and according to this to
 			if (boardNow.getBoardOne(x, y) == 1) { //this is X
+				//set button value
 				boardBtnArray[position].setText("X");
-				//then need user click
-				System.out.println("dianwo");
 
+				//set game info value
+				cutoffLabel.setText("If Cutoff Occurred? " + computerPlayerInst.getCutOffOccurred());
+				maxDepthLabel.setText("If Max Depth Reached? " + computerPlayerInst.getMaxDepthReached());
+				totalNodeLabel.setText("Total Number of Nodes Generated: " + computerPlayerInst.getTotalGenerateNodes());
+				maxPruneLabel.setText("Numbers of Pruning Occurred within MAX: " + computerPlayerInst.getPruneMax());
+				minPruneLabel.setText("Numbers of Pruning Occurred within MIN: " + computerPlayerInst.getPruneMin());
 
+				//check game terminal
+				if (endValue == 1) { //X (computer) win
+
+				} else if(endValue == 2) { //O (user) win
+
+				} else if (endValue == 3) { //draw
+
+				}
+
+				//then wait and catch user click
+				//use 'step mod 2' to compute?
 
 			}
 			else if (boardNow.getBoardOne(x, y) == 10) { //this is O
 				boardBtnArray[position].setText("O");
 
-				//then need computer click
-				int next = cp.getNextStep(boardNow);
+				//check game terminal
+				if (endValue == 1) { //X (computer) win
+
+				} else if(endValue == 2) { //O (user) win
+
+				} else if (endValue == 3) { //draw
+
+				}
+
+				//then wait computer click
+				int next = computerPlayerInst.getNextStep(boardNow);
 				boardBtnArray[next].doClick();
 			}
-			else {
-				System.out.println("!!!!!!!!!!");
+			else {//no X or O? ERROR catch
+
+				/*
 				for (int i=0; i<4; i++){
 					for (int j=0; j<4; j++){
 						System.out.println(i + ", "+ j + "= " + boardNow.getBoardOne(i,j));
 					}
 				}
+				*/
 			}
 
 

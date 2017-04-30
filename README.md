@@ -16,7 +16,7 @@
 
 输入一个O 你将得到一个计算机绞尽脑汁找到的一个X （10min内）
 
-算法使用老师提供的αβ剪枝+cutoff算法，eval()函数不期将改进（如果我能想出来的话 (感觉是想不出来了 170425
+算法使用老师提供的αβ剪枝+cutoff算法，eval()函数不期将改进（如果我能想出来的话 <del>(感觉是想不出来了 170425</del>
 
 ```
 function ALPHA-BETA-SEARCH(state) returns an action
