@@ -62,6 +62,15 @@ public class ComputerPlayer {
 
         boardNow.setBoardOne(this.getxNext(), this.getyNext(), 1); //set one!
 
+        searchTree.clear(); //clear tree
+        System.out.println("!!!!!"+this.getxNext()+this.getyNext());
+
+				for (int i=0; i<4; i++){
+					for (int j=0; j<4; j++){
+						System.out.println(i + ", "+ j + "= " + boardNow.getBoardOne(i,j));
+					}
+				}
+
 
 
         return (4*this.getxNext() + this.getyNext()); //return the positon in one value
