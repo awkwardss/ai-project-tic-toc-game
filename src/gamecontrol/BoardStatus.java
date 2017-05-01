@@ -1,5 +1,6 @@
 package gamecontrol;
 
+
 /**
  * BoardStatus class is the class for board status.
  * It contains methods: putOne
@@ -19,11 +20,19 @@ package gamecontrol;
  * Let the computer (or the max player) have the X symbol and the human player have the O symbol.
  * When the game starts, let the human player choose whether to go first or second.
  */
+
 public class BoardStatus {
     private int[][] board = new int[4][4]; //board
     //value of board: 0-not set 1-X 10-O
     private int utility;
     private int eval;
+
+
+    public void setUtility(int j) {this.utility = j;}
+    public int getUtility() {return this.utility;}
+
+    public void setEval(int j) {this.eval = j;}
+    public int getEval() {return this.eval;}
 
 
     public void setBoardOne(int j,int k, int value) {this.board[j][k] = value;}
@@ -91,11 +100,7 @@ public class BoardStatus {
         return true;
     }
 
-    public void setUtility(int j) {this.utility = j;}
-    public int getUtility() {return this.utility;}
 
-    public void setEval(int j) {this.eval = j;}
-    public int getEval() {return this.eval;}
 
     public int getLineValue(int j) {
         int sum=0;
@@ -215,5 +220,17 @@ public class BoardStatus {
         evaluate = 6*x3+3*x2+1*x1-(6*o3+3*o2+1*o1);
         this.setEval(evaluate);
     }
+
+
+    public void copyValueFrom(BoardStatus anotherBoard) {
+        this.setEval(anotherBoard.getEval());
+        this.setUtility(anotherBoard.getUtility());
+        for (int i=0; i<=3; i++){
+            for (int j=0; j<=3; j++){
+                this.setBoardOne(i, j, anotherBoard.getBoardOne(i, j));
+            }
+        }
+    }
+
 
 }

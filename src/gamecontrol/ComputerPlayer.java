@@ -19,41 +19,42 @@ public class ComputerPlayer {
     private int xNext;
     private int yNext;
 
-    //private BoardStatus boardNow;
-    private treeNode rootNode = new treeNode();
+    private BoardStatus boardInAlgo;
+    private treeNode rootNode;
 
     ArrayList<treeNode> searchTree = new ArrayList<>();
 
     public int getNextStep(BoardStatus boardNow){
-        //code for get the current board
-        //
-        //
-        //----------------------------------
-        //
 
-        rootNode.setRootNode(0, boardNow);
+        rootNode = new treeNode();
+
+        boardInAlgo = new BoardStatus();
+        boardInAlgo.copyValueFrom(boardNow);
+
+        rootNode.setRootNode(0, boardInAlgo);
         searchTree.add(rootNode);
 
         System.out.println("Please wait me!");
 
         int resultValue = ABCPruneSearch(rootNode); //get ab cutoff prune result value
 
+        System.out.println("RRRRRRRRREEEEEEZZUCLT VALUE: "+resultValue);
 
         System.out.println("Finished!");
 
-        treeNode resultNode = new treeNode();
+
 
         //
         //search the root node children with resultValue
         //
 
-        for (int i=0; i<rootNode.getChildSize(); i++){
-            treeNode t = rootNode.gettChildInIndex(i);
-            int v = t.getValue();
+
+        for (treeNode node: rootNode.gettChild()){
+            int v = node.getValue();
             if (v == resultValue) { // find the one with v = value
-                this.setxNext(t.getStepX());
-                this.setyNext(t.getStepX());
-                resultNode = t; //useless
+                this.setxNext(node.getStepX());
+                this.setyNext(node.getStepY());
+                break;
             }
         }
 
@@ -62,14 +63,23 @@ public class ComputerPlayer {
 
         boardNow.setBoardOne(this.getxNext(), this.getyNext(), 1); //set one!
 
-        searchTree.clear(); //clear tree
-        System.out.println("!!!!!"+this.getxNext()+this.getyNext());
 
-				for (int i=0; i<4; i++){
-					for (int j=0; j<4; j++){
-						System.out.println(i + ", "+ j + "= " + boardNow.getBoardOne(i,j));
-					}
-				}
+
+
+        for (treeNode test: searchTree) {
+            System.out.println("========>next node: DEPTH: "+test.getDepth()+" !!!value: "+test.getValue()+"---step: [[["+test.getStepX()+", "+test.getStepY()+"]");
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
+                    System.out.print("["+i + ", " + j + "]= " + test.getBoard().getBoardOne(i, j)+"; ");
+                }
+            }
+            System.out.println("");
+        }
+
+
+        searchTree.clear(); //clear tree
+
+        System.out.println("!!!!!"+this.getxNext()+this.getyNext());
 
 
 
@@ -101,6 +111,7 @@ public class ComputerPlayer {
 
         int utility = boardThisLevel.isTerminal();
         if (utility != 0) { //come to an end!
+            System.out.println(depth+"come to end level in MAX. utiti: "+ utility);
             this.setMaxDepthReached(true);
             node.setValue(utility);
             return utility;
@@ -121,14 +132,16 @@ public class ComputerPlayer {
 
                     boardThisLevel.setBoardOne(i, j, 1);
 
-                    BoardStatus boardNextLevel = boardThisLevel;
+                    BoardStatus boardNextLevel = new BoardStatus();
+                    boardNextLevel.copyValueFrom(boardThisLevel);
+
                     treeNode nodeNextLevel = new treeNode();
                     nodeNextLevel.setTreeNode(depth+1, boardNextLevel, i, j, node);
                     node.addChild(nodeNextLevel);
                     searchTree.add(nodeNextLevel);
 
                     value = Math.max(value, minValue(nodeNextLevel, depth+1, a, b));
-                    boardThisLevel.unSetBoardOne(i, j); //Seems useless
+                    boardThisLevel.unSetBoardOne(i, j);
 
                     if (value>=b) {//prune here
                         node.setValue(value); ///////////ATTENTION!!!!!!NODE OR NODENEXTLEVEL?????
@@ -153,6 +166,7 @@ public class ComputerPlayer {
 
         int utility = boardThisLevel.isTerminal();
         if (utility != 0) { //come to an end!
+            System.out.println(depth+"come to end level in MIN utiti: "+ utility);
             this.setMaxDepthReached(true);
             node.setValue(utility);
             return utility;
@@ -173,14 +187,16 @@ public class ComputerPlayer {
                 if (boardThisLevel.getBoardOne(i, j) == 0){
                     boardThisLevel.setBoardOne(i, j, 10);
 
-                    BoardStatus boardNextLevel = boardThisLevel;
+                    BoardStatus boardNextLevel = new BoardStatus();
+                    boardNextLevel.copyValueFrom(boardThisLevel);
+
                     treeNode nodeNextLevel = new treeNode();
                     nodeNextLevel.setTreeNode(depth+1, boardNextLevel, i, j, node);
                     node.addChild(nodeNextLevel);
                     searchTree.add(nodeNextLevel);
 
                     value = Math.min(value, maxValue(nodeNextLevel, depth+1, a, b));
-                    boardThisLevel.unSetBoardOne(i, j); //ALSO SEEMS USELESS
+                    boardThisLevel.unSetBoardOne(i, j);
 
                     if (value<=a) { //prune here
                         node.setValue(value); ///////////ATTENTION!!!!!!NODE OR NODENEXTLEVEL?????

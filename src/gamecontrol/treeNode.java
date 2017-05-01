@@ -14,7 +14,9 @@ public class treeNode {
     private int stepY;
 
     private treeNode tFather;
-    private ArrayList<treeNode> tChild = new ArrayList<>();
+    private ArrayList<treeNode> tChild;
+
+
 
     public void setTreeNode(int d, BoardStatus b, int x, int y, treeNode n){
         this.depth = d;
@@ -22,11 +24,13 @@ public class treeNode {
         this.stepX = x;
         this.stepY = y;
         this.tFather = n;
+        tChild = new ArrayList<>();
     }
 
     public void setRootNode(int d, BoardStatus b){
         this.depth = d;
         this.board = b;
+        tChild = new ArrayList<>();
     }
 
 
@@ -48,4 +52,5 @@ public class treeNode {
     public int getChildSize () {return  this.tChild.size();}
 
     public void addChild(treeNode n) {this.tChild.add(n);}
+    public ArrayList<treeNode> gettChild() {return tChild;}
 }

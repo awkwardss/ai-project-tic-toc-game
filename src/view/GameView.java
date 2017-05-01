@@ -158,9 +158,9 @@ public class GameView {
 	public void addGameInfo2 (int gameDiff) {
 		if (gameDiff == 1) {
 			this.gameStatus2 = new JLabel("Difficulty: Easy");
-		} else if (gameDiff == 2){
+		} else if (gameDiff == 4){
 			this.gameStatus2 = new JLabel("Difficulty: Intermediate");
-		} else if (gameDiff == 4) {
+		} else if (gameDiff == 9) {
 			this.gameStatus2 = new JLabel("Difficulty: Difficult");
 		}
 		this.gameInfoTopPanel.add(gameStatus2);
@@ -205,14 +205,6 @@ public class GameView {
 		}
 
 		public void actionPerformed(ActionEvent event){
-			//redraw full board?
-			/*
-			for (int i=0; i<4; i++){
-				for (int j=0; j<4; j++){
-					if
-				}
-			}
-			*/
 
 			//disable this button
 			boardBtnArray[position].setEnabled(false);
@@ -222,7 +214,6 @@ public class GameView {
 
 			//set button value: X or O? and according to this to
 			if (boardNow.getBoardOne(x, y) == 1) { //this is X
-				System.out.println("XXXXXXXXXX"+x+y);
 
 				//set button value
 				boardBtnArray[position].setText("X");
@@ -246,7 +237,7 @@ public class GameView {
 
 			}
 			else if (boardNow.getBoardOne(x, y) == 0) { //this is O
-				System.out.println("OOOOOOOOOOOOOO"+x+y);
+
 				boardBtnArray[position].setText("O");
 				boardNow.setBoardOne(x, y, 10); //give value 10 to announce O for this position in board
 
@@ -258,7 +249,7 @@ public class GameView {
 
 				//then wait computer click
 				int next = computerPlayerInst.getNextStep(boardNow);
-				System.out.println("NNNNNNNNNNNNNNN" + next);
+				//System.out.println("NNNNNNNNNNNNNNN" + next);
 				boardBtnArray[next].doClick();
 			}
 			else {//no X or O? ERROR catch
