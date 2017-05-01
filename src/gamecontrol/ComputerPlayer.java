@@ -34,7 +34,12 @@ public class ComputerPlayer {
         rootNode.setRootNode(0, boardNow);
         searchTree.add(rootNode);
 
+        System.out.println("Please wait me!");
+
         int resultValue = ABCPruneSearch(rootNode); //get ab cutoff prune result value
+
+
+        System.out.println("Finished!");
 
         treeNode resultNode = new treeNode();
 

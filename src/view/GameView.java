@@ -108,8 +108,9 @@ public class GameView {
 		frame.setVisible(true);
 
 
+		computerPlayerInst = new ComputerPlayer();
+		computerPlayerInst.setGameDifficulty(gameDiff);
 		if (!uPlayFirst){
-			computerPlayerInst = new ComputerPlayer();
 			computerPlayerInst.firstStep(boardNow);
 			boardBtnArray[5].doClick(); //position (1, 1)
 		}
@@ -159,7 +160,7 @@ public class GameView {
 			this.gameStatus2 = new JLabel("Difficulty: Easy");
 		} else if (gameDiff == 2){
 			this.gameStatus2 = new JLabel("Difficulty: Intermediate");
-		} else if (gameDiff == 3) {
+		} else if (gameDiff == 4) {
 			this.gameStatus2 = new JLabel("Difficulty: Difficult");
 		}
 		this.gameInfoTopPanel.add(gameStatus2);
@@ -216,11 +217,13 @@ public class GameView {
 			//disable this button
 			boardBtnArray[position].setEnabled(false);
 
-			endValue = boardNow.isTerminal();
+
 
 
 			//set button value: X or O? and according to this to
 			if (boardNow.getBoardOne(x, y) == 1) { //this is X
+				System.out.println("XXXXXXXXXX"+x+y);
+
 				//set button value
 				boardBtnArray[position].setText("X");
 
@@ -232,36 +235,34 @@ public class GameView {
 				minPruneLabel.setText("Numbers of Pruning Occurred within MIN: " + computerPlayerInst.getPruneMin());
 
 				//check game terminal
-				if (endValue == 1) { //X (computer) win
-
-				} else if(endValue == 2) { //O (user) win
-
-				} else if (endValue == 3) { //draw
-
+				endValue = boardNow.isTerminal();
+				//check game terminal
+				if (endValue == 1 || endValue == 2 || endValue == 3) { //game end
+					endGame(endValue);
 				}
 
 				//then wait and catch user click
-				//use 'step mod 2' to compute?
+				//
 
 			}
-			else if (boardNow.getBoardOne(x, y) == 10) { //this is O
+			else if (boardNow.getBoardOne(x, y) == 0) { //this is O
+				System.out.println("OOOOOOOOOOOOOO"+x+y);
 				boardBtnArray[position].setText("O");
+				boardNow.setBoardOne(x, y, 10); //give value 10 to announce O for this position in board
 
+				endValue = boardNow.isTerminal();
 				//check game terminal
-				if (endValue == 1) { //X (computer) win
-
-				} else if(endValue == 2) { //O (user) win
-
-				} else if (endValue == 3) { //draw
-
+				if (endValue == 1 || endValue == 2 || endValue == 3) { //game end
+					endGame(endValue);
 				}
 
 				//then wait computer click
 				int next = computerPlayerInst.getNextStep(boardNow);
+				System.out.println("NNNNNNNNNNNNNNN" + next);
 				boardBtnArray[next].doClick();
 			}
 			else {//no X or O? ERROR catch
-
+				//System.out.println("!!!!!!!!!!!!!");
 				/*
 				for (int i=0; i<4; i++){
 					for (int j=0; j<4; j++){
@@ -278,4 +279,34 @@ public class GameView {
 
 		}
 	}
+
+	/*
+	 * end game method
+	 * @param: int i: 1-X computer win; 2-O player win; 3-draw
+	 */
+	public void endGame(int i) {
+		//disable all buttons
+		for (int j=0; j<16; j++) {
+
+			boardBtnArray[j].setEnabled(false);
+		}
+
+		//pop out result
+		if (i == 1) {
+			JOptionPane.showMessageDialog(frame,
+					"Computer (X) win!\n"+
+					"You can click the restart button to restart.");
+		} else if (i == 2) {
+			JOptionPane.showMessageDialog(frame,
+					"You (O) win!\n"+
+					"You can click the restart button to restart.");
+		} else if (i == 3) {
+			JOptionPane.showMessageDialog(frame,
+					"Draw...\n"+
+					"You can click the restart button to restart.");
+		} else {
+			System.out.println("WRONG PARA TO ENDGAME() METHOD");
+		}
+	}
+
 }

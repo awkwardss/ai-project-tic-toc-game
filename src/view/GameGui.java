@@ -49,7 +49,7 @@ public class GameGui{
 		group = new ButtonGroup();
 		addRadioButton("Easy", 1);
 		addRadioButton("Intermediate", 2);
-		addRadioButton("Difficult", 3);
+		addRadioButton("Difficult", 4);
 
 		//Playing order choosing radio box
 		orderGroupPanel = new JPanel();

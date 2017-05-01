@@ -14,7 +14,7 @@ public class treeNode {
     private int stepY;
 
     private treeNode tFather;
-    private ArrayList<treeNode> tChild = new ArrayList<treeNode>();
+    private ArrayList<treeNode> tChild = new ArrayList<>();
 
     public void setTreeNode(int d, BoardStatus b, int x, int y, treeNode n){
         this.depth = d;

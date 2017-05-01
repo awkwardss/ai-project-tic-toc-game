@@ -25,6 +25,7 @@ public class BoardStatus {
     private int utility;
     private int eval;
 
+
     public void setBoardOne(int j,int k, int value) {this.board[j][k] = value;}
     public int getBoardOne(int j, int k) {return this.board[j][k];}
 
@@ -123,7 +124,7 @@ public class BoardStatus {
     public int getDiago145() {
         int sum = 0;
         for (int j = 0; j <= 3; j++) {
-            sum = sum + this.getBoardOne(j, 4 - j);
+            sum = sum + this.getBoardOne(j, 3 - j);
         }
         return sum;
     }
