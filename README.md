@@ -2,6 +2,7 @@
 
 ### History
 
+170501 搞定 teminal总闪退 窒息
 170428 摸鱼了好几天……咕唔……总之在写button的listener,写完这个就差不多完工了
 
 170424 Finished αβ pruning with cutoff algorithm
