@@ -158,7 +158,7 @@ public class GameView {
 	public void addGameInfo2 (int gameDiff) {
 		if (gameDiff == 1) {
 			this.gameStatus2 = new JLabel("Difficulty: Easy");
-		} else if (gameDiff == 4){
+		} else if (gameDiff == 7){
 			this.gameStatus2 = new JLabel("Difficulty: Intermediate");
 		} else if (gameDiff == 9) {
 			this.gameStatus2 = new JLabel("Difficulty: Difficult");

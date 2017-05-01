@@ -48,7 +48,7 @@ public class GameGui{
 		//radio button for difficulty
 		group = new ButtonGroup();
 		addRadioButton("Easy", 1);
-		addRadioButton("Intermediate", 4);
+		addRadioButton("Intermediate", 7);
 		addRadioButton("Difficult", 9);
 
 		//Playing order choosing radio box

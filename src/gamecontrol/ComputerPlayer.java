@@ -38,7 +38,7 @@ public class ComputerPlayer {
 
         int resultValue = ABCPruneSearch(rootNode); //get ab cutoff prune result value
 
-        System.out.println("RRRRRRRRREEEEEEZZUCLT VALUE: "+resultValue);
+        //System.out.println("RRRRRRRRREEEEEEZZUCLT VALUE: "+resultValue);
 
         System.out.println("Finished!");
 
@@ -65,7 +65,7 @@ public class ComputerPlayer {
 
 
 
-
+        /*
         for (treeNode test: searchTree) {
             System.out.println("========>next node: DEPTH: "+test.getDepth()+" !!!value: "+test.getValue()+"---step: [[["+test.getStepX()+", "+test.getStepY()+"]");
             for (int i = 0; i < 4; i++) {
@@ -75,11 +75,12 @@ public class ComputerPlayer {
             }
             System.out.println("");
         }
+        */
 
 
         searchTree.clear(); //clear tree
 
-        System.out.println("!!!!!"+this.getxNext()+this.getyNext());
+        //System.out.println("!!!!!"+this.getxNext()+this.getyNext());
 
 
 
@@ -111,7 +112,7 @@ public class ComputerPlayer {
 
         int utility = boardThisLevel.isTerminal();
         if (utility != 0) { //come to an end!
-            System.out.println(depth+"come to end level in MAX. utiti: "+ utility);
+            //System.out.println(depth+"come to end level in MAX. utiti: "+ utility);
             this.setMaxDepthReached(true);
             node.setValue(utility);
             return utility;
@@ -166,7 +167,7 @@ public class ComputerPlayer {
 
         int utility = boardThisLevel.isTerminal();
         if (utility != 0) { //come to an end!
-            System.out.println(depth+"come to end level in MIN utiti: "+ utility);
+            //System.out.println(depth+"come to end level in MIN utiti: "+ utility);
             this.setMaxDepthReached(true);
             node.setValue(utility);
             return utility;
