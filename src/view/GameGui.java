@@ -5,8 +5,13 @@ import java.awt.*;
 import java.awt.event.*;
 
 /*
- * GUI file for game. Contains 2 GUI page: GUI1 and GUI2
+ * GUI file for game. Contains GUI page: GUI1
+ * GUI 1 is the GUI page for playing order and difficulty choices
+ * For easy level: computer will only generate 1 layer nodes.
+ * For medium level: will generate 5 layers nodes.
+ * For hard level: will generate 8 layers nodes. (9 layers computing will exceed the 10 seconds computing time limit for my computer)
  */
+
 public class GameGui{
 	
 	int gameDifficulty = 1;
@@ -48,8 +53,8 @@ public class GameGui{
 		//radio button for difficulty
 		group = new ButtonGroup();
 		addRadioButton("Easy", 1);
-		addRadioButton("Intermediate", 7);
-		addRadioButton("Difficult", 9);
+		addRadioButton("Intermediate", 5);
+		addRadioButton("Difficult", 8);
 
 		//Playing order choosing radio box
 		orderGroupPanel = new JPanel();
@@ -120,6 +125,7 @@ public class GameGui{
 
 	/*
 	 * inner class for start button listener
+	 * Once user click start button will jump to GUI2.
 	 */
 	class StartButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent event){

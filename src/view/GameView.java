@@ -3,16 +3,19 @@ package view;
 import gamecontrol.BoardStatus;
 import gamecontrol.ComputerPlayer;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
+
+/*
+ * GUI file for game. Contains GUI page: GUI2
+ * GUI 2 is the GUI page for playing game
+ * For easy level: computer will only generate 1 layer nodes.
+ * For medium level: will generate 5 layers nodes.
+ * For hard level: will generate 8 layers nodes. (9 layers computing will exceed the 10 seconds computing time limit for my computer)
+ */
 public class GameView {
-
 
 
 	private JFrame frame;
@@ -34,6 +37,9 @@ public class GameView {
 
 	/*
 	 * Main playing GUI (GUI2).
+	 * Contains 3 main panels: 2 game information panels (in head part and left part) and 1 game board panel (in right)
+	 * @param: int gameDifficulty: 1-easy, 5-medium, 8-difficult
+	 * @param: boolean uPlayFirst: T for user play first, F for computer play first
 	 */
 	public void GameView(int gameDifficulty, boolean uPlayFirst){
 		this.gameDiff = gameDifficulty;
@@ -76,12 +82,6 @@ public class GameView {
 		restartButton.addActionListener(new reStartButtonListener());
 
 
-
-
-		////////////////////////////
-		/////////////not right//////need modify//////////
-		/////////////////////////////////////////
-		////////////////////////
 		// game info panel -- LEFT part
 		gameInfoLeftPanel = new JPanel();
 		gameInfoLeftPanel.setLayout(new GridLayout(10, 1));
@@ -91,9 +91,6 @@ public class GameView {
 		totalNodeLabel = new JLabel("Total Number of Nodes Generated:");
 		maxPruneLabel = new JLabel("Numbers of Pruning Occurred within MAX:");
 		minPruneLabel = new JLabel("Numbers of Pruning Occurred within MIN:");
-
-
-
 		gameInfoLeftPanel.add(cutoffLabel);
 		gameInfoLeftPanel.add(maxDepthLabel);
 		gameInfoLeftPanel.add(totalNodeLabel);
@@ -107,9 +104,13 @@ public class GameView {
 
 		frame.setVisible(true);
 
-
+		//initialize a new instance for ComputerPlayer class and pass difficulty to the instance.
 		computerPlayerInst = new ComputerPlayer();
 		computerPlayerInst.setGameDifficulty(gameDiff);
+
+		//small test for playing order.
+		// If computer play first, it will automatically choose position (1, 1)
+		// (detailed board position map is in BoardStatus class comments)
 		if (!uPlayFirst){
 			computerPlayerInst.firstStep(boardNow);
 			boardBtnArray[5].doClick(); //position (1, 1)
@@ -131,7 +132,7 @@ public class GameView {
 
 	}
 
-/*
+
 	/*
 	 * Method for GUI2. Add game board buttons
 	 * @param x: x value of button position
@@ -154,18 +155,27 @@ public class GameView {
 
 
 
-
+	/*
+     * Method for adding game info in the head part panel.
+     * Add game difficulty info
+     * @param int gameDiff: game difficulty
+     */
 	public void addGameInfo2 (int gameDiff) {
 		if (gameDiff == 1) {
 			this.gameStatus2 = new JLabel("Difficulty: Easy");
-		} else if (gameDiff == 7){
+		} else if (gameDiff == 5){
 			this.gameStatus2 = new JLabel("Difficulty: Intermediate");
-		} else if (gameDiff == 9) {
+		} else if (gameDiff == 8) {
 			this.gameStatus2 = new JLabel("Difficulty: Difficult");
 		}
 		this.gameInfoTopPanel.add(gameStatus2);
 	}
 
+	/*
+     * Method for adding game info in the head part panel.
+     * Add game playing order info
+     * @param boolean userPlayFirst: playing order. T-user play first, F-computer play first
+     */
 	public void addGameInfo3 (boolean userPlayFirst) {
 		if (userPlayFirst) {
 			this.gameStatus3 = new JLabel("USER plays first");
@@ -176,7 +186,8 @@ public class GameView {
 	}
 
 	/*
-	 * inner class for start button listener
+	 * inner class for restart button listener
+	 * This restart button is in head part game info panel
 	 */
 	class reStartButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent event){
@@ -206,10 +217,8 @@ public class GameView {
 
 		public void actionPerformed(ActionEvent event){
 
-			//disable this button
+			//First, disable this button
 			boardBtnArray[position].setEnabled(false);
-
-
 
 
 			//set button value: X or O? and according to this to
